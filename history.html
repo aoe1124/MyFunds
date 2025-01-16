@@ -4,22 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyFunds - 账户历史</title>
-    <!-- ApexCharts图表库 -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- 自定义样式 -->
     <link rel="stylesheet" href="css/navigation.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/history.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body>
+    <!-- 主容器 -->
     <div class="container">
-        <!-- 账户历史内容 -->
-        <div class="history-content">
-            <!-- 后续添加图表等内容 -->
+        <!-- 账户标签栏 -->
+        <div class="account-tabs">
+            <!-- 标签由 JS 动态生成 -->
+        </div>
+
+        <!-- 图表卡片 -->
+        <div class="card">
+            <div id="accountChart"></div>
         </div>
     </div>
 
-    <!-- 自定义脚本 -->
+    <!-- JavaScript -->
     <script src="js/navigation.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/history.js"></script>
     <script>
         // 初始化导航
         Navigation.init();

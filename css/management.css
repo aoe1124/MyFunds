@@ -134,19 +134,19 @@
     padding: 12px 20px;
     border: none;
     border-radius: 10px;
-    background: #007AFF;
+    background: #7BB7A5;
     color: white;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(123, 183, 165, 0.1);
 }
 
 .add-account-btn:hover {
-    background: #0056b3;
+    background: #69a091;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(123, 183, 165, 0.2);
 }
 
 /* 主内容区域样式 */
