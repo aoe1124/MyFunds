@@ -21,6 +21,21 @@ const Management = {
         document.querySelector('.add-account-btn').addEventListener('click', () => {
             this.showAddAccountDialog();
         });
+
+        // 导出数据按钮
+        document.querySelector('.export-btn').addEventListener('click', () => {
+            this.exportData();
+        });
+
+        // 导入数据按钮
+        document.querySelector('.import-btn').addEventListener('click', () => {
+            document.getElementById('import-file').click();
+        });
+
+        // 文件选择变化
+        document.getElementById('import-file').addEventListener('change', (e) => {
+            this.importData(e.target.files[0]);
+        });
     },
 
     // 渲染账户列表
@@ -312,7 +327,7 @@ const Management = {
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
         const nameHeader = document.createElement('th');
-        nameHeader.textContent = '账户名称';
+        nameHeader.textContent = '账户';
         headerRow.appendChild(nameHeader);
 
         // 添加月份表头
@@ -510,6 +525,80 @@ const Management = {
             const total = Storage.getMonthlyTotal(monthKey);
             totalRow.children[month].textContent = total ? total.toLocaleString('zh-CN') : '-';
         }
+    },
+
+    // 导出数据
+    exportData(isBackup = false) {
+        const data = {
+            accounts: Storage.getAccounts(),
+            records: Storage.getAllRecords()
+        };
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        
+        // 如果是备份，添加backup标记到文件名
+        const date = new Date().toISOString().split('T')[0];
+        a.download = isBackup 
+            ? `myfunds_backup_before_import_${date}.json`
+            : `myfunds_backup_${date}.json`;
+            
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    },
+
+    // 导入数据
+    importData(file) {
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                
+                // 验证数据格式
+                if (!data.accounts || !Array.isArray(data.accounts) || !data.records) {
+                    throw new Error('数据格式不正确');
+                }
+
+                // 准备确认信息
+                const accountCount = data.accounts.length;
+                const monthCount = Object.keys(data.records.accountData || {}).length;
+                const confirmMessage = `即将导入的数据包含：\n` +
+                    `- ${accountCount} 个账户\n` +
+                    `- ${monthCount} 条账户记录\n\n` +
+                    `导入新数据将完全覆盖现有数据。\n` +
+                    `为了安全起见，我们会自动备份当前数据。\n\n` +
+                    `是否继续？`;
+
+                // 确认导入
+                if (confirm(confirmMessage)) {
+                    // 先导出当前数据作为备份
+                    this.exportData(true);
+                    
+                    // 导入新数据
+                    localStorage.setItem('accounts', JSON.stringify(data.accounts));
+                    localStorage.setItem('accountData', JSON.stringify(data.records.accountData));
+                    localStorage.setItem('monthNotes', JSON.stringify(data.records.monthNotes));
+                    localStorage.setItem('assetData', JSON.stringify(data.records.assetData));
+                    
+                    // 刷新页面显示
+                    this.renderAccountList();
+                    this.renderYearList();
+                    
+                    alert('数据导入成功！\n如需恢复之前的数据，请查看自动生成的备份文件。');
+                }
+            } catch (err) {
+                alert('导入失败：' + err.message);
+            }
+        };
+        reader.readAsText(file);
+        // 清空文件选择，确保可以重复选择同一个文件
+        document.getElementById('import-file').value = '';
     }
 };
 

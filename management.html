@@ -25,6 +25,21 @@
             <div class="account-list">
                 <!-- 账户列表将由JavaScript动态生成 -->
             </div>
+            <div class="data-operations">
+                <button class="data-btn export-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 9L8 14L13 9M8 14V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    导出数据
+                </button>
+                <button class="data-btn import-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 7L8 2L13 7M8 2V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    导入数据
+                </button>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+            </div>
         </div>
 
         <!-- 右侧数据表格区域 -->

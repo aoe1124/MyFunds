@@ -209,6 +209,15 @@ const Storage = {
         }
     },
 
+    // 获取所有记录数据
+    getAllRecords() {
+        return {
+            accountData: localStorage.getItem('accountData') ? JSON.parse(localStorage.getItem('accountData')) : {},
+            monthNotes: localStorage.getItem('monthNotes') ? JSON.parse(localStorage.getItem('monthNotes')) : {},
+            assetData: this.getAllAssets()
+        };
+    },
+
     // 清除所有数据（用于测试）
     clearAll() {
         localStorage.removeItem('accounts');

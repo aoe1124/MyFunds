@@ -11,7 +11,7 @@
 
 /* 左侧边栏样式 */
 .sidebar {
-    width: 280px;
+    width: 240px;
     background: white;
     border-radius: 16px;
     display: flex;
@@ -19,7 +19,7 @@
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     height: fit-content;
-    margin-right: 32px;
+    margin-right: 24px;
     transition: all 0.2s ease;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .sidebar-header {
-    padding: 24px;
+    padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     background: linear-gradient(to bottom, #fff, #fafafa);
     border-radius: 16px 16px 0 0;
@@ -61,7 +61,7 @@
 }
 
 .account-item {
-    padding: 16px;
+    padding: 12px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -131,7 +131,7 @@
     align-items: center;
     gap: 8px;
     width: 100%;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: none;
     border-radius: 10px;
     background: #7BB7A5;
@@ -221,6 +221,8 @@
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
+    table-layout: fixed;
+    font-size: 15px;
 }
 
 .data-table th,
@@ -228,12 +230,18 @@
     padding: 12px;
     text-align: right;
     border: 1px solid #eee;
+    width: 85px;
+    min-width: 85px;
+    max-width: 85px;
 }
 
 .data-table th:first-child,
 .data-table td:first-child {
     text-align: left;
     background: #f9f9f9;
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
 }
 
 /* 备注行样式 */
@@ -253,7 +261,7 @@
     border-radius: 6px;
     background: transparent;
     text-align: left;
-    font-size: 14px;
+    font-size: 15px;
     color: #1a1a1a;
     transition: all 0.2s ease;
 }
@@ -287,7 +295,7 @@
     border-radius: 6px;
     background: transparent;
     text-align: right;
-    font-size: 14px;
+    font-size: 15px;
     color: #1a1a1a;
     transition: all 0.2s ease;
 }
@@ -326,6 +334,7 @@
 .data-table .total-row td {
     background: #f8f9fa;
     font-weight: 600;
+    font-size: 15px;
     color: #1a1a1a;
     border-top: 2px solid #e5e7eb;
 }
@@ -534,6 +543,19 @@
         max-width: 400px;
         margin: 0 16px;
     }
+
+    .data-table {
+        font-size: 14px;
+    }
+    
+    .cell-input,
+    .note-input {
+        font-size: 14px;
+    }
+    
+    .data-table .total-row td {
+        font-size: 14px;
+    }
 }
 
 /* 自定义tooltip样式 */
@@ -563,4 +585,58 @@
     border-top: 1px solid #f0f0f0;
     padding-top: 8px;
     margin-top: 8px;
+}
+
+/* 数据导入导出按钮样式 */
+.data-operations {
+    padding: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.data-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.data-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.data-btn svg {
+    color: #6b7280;
+}
+
+.data-btn:hover svg {
+    color: #374151;
+}
+
+.export-btn {
+    background: #f0f7ff;
+    border-color: rgba(0, 122, 255, 0.2);
+    color: #007AFF;
+}
+
+.export-btn:hover {
+    background: #e6f0ff;
+    border-color: rgba(0, 122, 255, 0.3);
+}
+
+.export-btn svg {
+    color: #007AFF;
 } 
