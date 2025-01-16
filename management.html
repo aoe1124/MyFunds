@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyFunds - 数据管理</title>
+    <!-- 导入样式 -->
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/management.css">
+</head>
+<body>
+    <!-- 导航栏将由JavaScript动态插入 -->
+    <div class="container">
+        <!-- 左侧账户管理面板 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>账户管理</h2>
+                <button class="add-account-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    添加账户
+                </button>
+            </div>
+            <div class="account-list">
+                <!-- 账户列表将由JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <!-- 右侧数据表格区域 -->
+        <div class="main-content">
+            <div class="year-list"></div>
+        </div>
+    </div>
+
+    <!-- 导入脚本 -->
+    <script src="js/storage.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        // 初始化导航
+        Navigation.init();
+    </script>
+    <script src="js/management.js"></script>
+</body>
+</html> 

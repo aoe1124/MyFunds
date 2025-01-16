@@ -1,0 +1,92 @@
+/* 历史页面容器 */
+.history-container {
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* 账户切换标签栏 */
+.account-tabs {
+    display: flex;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.account-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.account-tab {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    background: #f5f5f5;
+    color: #666;
+}
+
+.account-tab:hover {
+    background: #e5e5e5;
+}
+
+.account-tab.active {
+    background: #7BB7A5;
+    color: white;
+}
+
+.account-tab.inactive {
+    background: #f0f0f0;
+    color: #999;
+}
+
+/* 账户信息卡片 */
+.account-info {
+    display: flex;
+    gap: 24px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-item .label {
+    font-size: 14px;
+    color: #666;
+}
+
+.info-item .value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* 图表容器 */
+.history-chart-container {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+}
+
+#account-history-chart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+} 
