@@ -5,6 +5,11 @@ const Management = {
     
     // 初始化
     init() {
+        // 清理错误数据
+        if (Storage.cleanAssetData()) {
+            console.log('数据清理成功');
+        }
+
         // 初始化事件监听
         this.initEvents();
         
@@ -13,6 +18,25 @@ const Management = {
         
         // 生成年份表格
         this.renderYearList();
+
+        // === 临时调试代码 ===
+        console.log('=== 数据调试信息 ===');
+        // 1. 检查accountData
+        const accountData = localStorage.getItem('accountData');
+        console.log('账户数据(accountData):', JSON.parse(accountData));
+        
+        // 2. 检查assetData
+        const assetData = localStorage.getItem('assetData');
+        console.log('资产数据(assetData):', JSON.parse(assetData));
+        
+        // 3. 检查2017年1月的数据
+        const monthKey = '2017-01';
+        console.log(`${monthKey}的月度总计:`, Storage.getMonthlyTotal(monthKey));
+        
+        // 4. 检查图表数据
+        const chartData = Storage.getTotalAssetsByMonth();
+        console.log('图表数据:', chartData);
+        // === 调试代码结束 ===
     },
 
     // 初始化事件监听

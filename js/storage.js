@@ -97,7 +97,7 @@ const Storage = {
         }
     },
 
-    // 删除账户
+    // 删除账户（更新：同时清理assetData）
     deleteAccount(accountName) {
         const accounts = this.getAccounts();
         const newAccounts = accounts.filter(a => a.name !== accountName);
@@ -113,6 +113,13 @@ const Storage = {
             }
         });
         localStorage.setItem('accountData', JSON.stringify(accountData));
+
+        // 同时清理assetData中的相关记录
+        const assets = this.getAllAssets();
+        const cleanedAssets = assets.filter(asset => 
+            asset.account !== accountName
+        );
+        localStorage.setItem('assetData', JSON.stringify(cleanedAssets));
     },
 
     // 获取指定账户在指定月份的金额
@@ -225,5 +232,33 @@ const Storage = {
         localStorage.removeItem('assetData');
         localStorage.removeItem('monthNotes');
         console.log('已清除所有数据');
+    },
+
+    // 清理错误的资产数据
+    cleanAssetData() {
+        try {
+            // 获取当前有效的账户列表
+            const validAccounts = this.getAccounts().map(a => a.name);
+            
+            // 获取并清理资产数据
+            const assets = this.getAllAssets();
+            const cleanedAssets = assets.filter(asset => 
+                validAccounts.includes(asset.account)
+            );
+            
+            // 保存清理后的数据
+            localStorage.setItem('assetData', JSON.stringify(cleanedAssets));
+            
+            console.log('数据清理完成：', {
+                before: assets.length,
+                after: cleanedAssets.length,
+                removed: assets.length - cleanedAssets.length
+            });
+            
+            return true;
+        } catch (error) {
+            console.error('清理数据失败：', error);
+            return false;
+        }
     }
 }; 
